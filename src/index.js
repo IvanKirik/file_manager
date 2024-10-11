@@ -1,6 +1,15 @@
 import os from 'os';
 import {COMMANDS} from "./constants/commands.js";
-import {changeDirectory, goUp, listDirectory} from "./operations/index.js";
+import {
+    changeDirectory,
+    copyFile,
+    createFile,
+    goUp,
+    listDirectory,
+    moveFile, osArgsHandler,
+    readFile, removeFile,
+    renameFile
+} from "./operations/index.js";
 
 let currentDir = os.homedir();
 const args = process.argv.slice(2);
@@ -33,6 +42,27 @@ process.stdin.on('data', (data) => {
             case COMMANDS.LS:
                 listDirectory(currentDir);
                 break;
+            case COMMANDS.CAT:
+                readFile(currentDir, args[0])
+                break;
+            case COMMANDS.ADD:
+                createFile(currentDir, args[0])
+                break;
+            case COMMANDS.RN:
+                renameFile(currentDir, args[0], args[1])
+                break;
+            case COMMANDS.CP:
+                copyFile(currentDir, args[0], args[1]);
+                break;
+            case COMMANDS.MV:
+                moveFile(currentDir, args[0], args[1]);
+                break;
+            case COMMANDS.RM:
+                removeFile(currentDir, args[0]);
+                break;
+            case COMMANDS.OS:
+                osArgsHandler(args[0])
+                break;
             case COMMANDS.EXIT:
                 console.log(`Thank you for using File Manager, ${username}, goodbye!`);
                 process.exit();
@@ -47,7 +77,6 @@ process.stdin.on('data', (data) => {
         console.log(`Thank you for using File Manager, ${username}, goodbye!`);
         process.exit();
     }
-
 
     console.log(`You are currently in ${currentDir}`);
 });
