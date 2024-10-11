@@ -1,9 +1,9 @@
 import os from 'os';
 import {COMMANDS} from "./constants/commands.js";
 import {
-    changeDirectory,
+    changeDirectory, compressFile,
     copyFile,
-    createFile,
+    createFile, decompressFile,
     goUp, hashFile,
     listDirectory,
     moveFile, osArgsHandler,
@@ -65,6 +65,12 @@ process.stdin.on('data', (data) => {
                 break;
             case COMMANDS.HASH:
                 hashFile(currentDir, args[0])
+                break;
+            case COMMANDS.COMPRESS:
+                compressFile(currentDir, args[0], args[1])
+                break;
+            case COMMANDS.DECOMPRESS:
+                decompressFile(currentDir, args[0], args[1])
                 break;
             case COMMANDS.EXIT:
                 console.log(`Thank you for using File Manager, ${username}, goodbye!`);

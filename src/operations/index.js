@@ -9,3 +9,5 @@ export * from './move-file.js';
 export * from './remove-file.js';
 export * from './os-args-handler.js'
 export * from './hash-file.js'
+export * from './compress-file.js'
+export * from './decompress-file.js'
