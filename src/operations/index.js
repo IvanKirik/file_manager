@@ -8,3 +8,4 @@ export * from './copy-file.js';
 export * from './move-file.js';
 export * from './remove-file.js';
 export * from './os-args-handler.js'
+export * from './hash-file.js'

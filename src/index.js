@@ -4,7 +4,7 @@ import {
     changeDirectory,
     copyFile,
     createFile,
-    goUp,
+    goUp, hashFile,
     listDirectory,
     moveFile, osArgsHandler,
     readFile, removeFile,
@@ -62,6 +62,9 @@ process.stdin.on('data', (data) => {
                 break;
             case COMMANDS.OS:
                 osArgsHandler(args[0])
+                break;
+            case COMMANDS.HASH:
+                hashFile(currentDir, args[0])
                 break;
             case COMMANDS.EXIT:
                 console.log(`Thank you for using File Manager, ${username}, goodbye!`);
