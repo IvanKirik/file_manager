@@ -36,7 +36,7 @@ process.stdin.on('data', async (data) => {
                 if (parentDir) currentDir = parentDir;
                 break;
             case COMMANDS.CD:
-                const newDir = changeDirectory(currentDir, args[0]);
+                const newDir = await changeDirectory(currentDir, args[0]);
                 if (newDir) currentDir = newDir;
                 break;
             case COMMANDS.LS:

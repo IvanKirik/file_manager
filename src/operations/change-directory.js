@@ -5,14 +5,14 @@ export async function changeDirectory(currentDir, directory) {
     const newPath = isAbsolute(directory) ? directory : join(currentDir, directory);
     try {
         await fs.access(newPath);
-        const stats = await fs.stat(newPath); // Получаем информацию о файле
+        const stats = await fs.stat(newPath);
 
         if (stats.isDirectory()) {
-            return newPath; // Если это директория, возвращаем новый путь
+            return newPath;
         } else {
             console.log('Invalid input');
         }
     } catch (error) {
-        console.log('Invalid input'); // Если возникла ошибка, выводим сообщение
+        console.log('Invalid input');
     }
 }
