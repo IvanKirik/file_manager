@@ -25,7 +25,7 @@ process.on('SIGINT', () => {
     process.exit();
 });
 
-process.stdin.on('data', (data) => {
+process.stdin.on('data', async (data) => {
     const input = data.toString().trim();
     const [command, ...args] = input.split(' ');
 
@@ -46,19 +46,19 @@ process.stdin.on('data', (data) => {
                 readFile(currentDir, args[0])
                 break;
             case COMMANDS.ADD:
-                createFile(currentDir, args[0])
+                await createFile(currentDir, args[0])
                 break;
             case COMMANDS.RN:
-                renameFile(currentDir, args[0], args[1])
+                await renameFile(currentDir, args[0], args[1])
                 break;
             case COMMANDS.CP:
-                copyFile(currentDir, args[0], args[1]);
+                await copyFile(currentDir, args[0], args[1]);
                 break;
             case COMMANDS.MV:
-                moveFile(currentDir, args[0], args[1]);
+                await moveFile(currentDir, args[0], args[1]);
                 break;
             case COMMANDS.RM:
-                removeFile(currentDir, args[0]);
+                await removeFile(currentDir, args[0]);
                 break;
             case COMMANDS.OS:
                 osArgsHandler(args[0])

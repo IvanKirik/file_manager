@@ -1,7 +1,7 @@
 import {removeFile} from "./remove-file.js";
 import {copyFile} from "./copy-file.js";
 
-export function moveFile(currentDir, sourcePath, destDir) {
-    copyFile(currentDir, sourcePath, destDir);
-    removeFile(currentDir, sourcePath);
+export async function moveFile(currentDir, sourcePath, destDir) {
+    await copyFile(currentDir, sourcePath, destDir);
+    await removeFile(currentDir, sourcePath);
 }

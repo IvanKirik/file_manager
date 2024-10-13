@@ -1,11 +1,18 @@
 import { isAbsolute, join } from 'path';
-import { existsSync, statSync } from 'fs';
+import { promises as fs } from 'fs';
 
-export function changeDirectory(currentDir, directory) {
+export async function changeDirectory(currentDir, directory) {
     const newPath = isAbsolute(directory) ? directory : join(currentDir, directory);
-    if (existsSync(newPath) && statSync(newPath).isDirectory()) {
-        return newPath;
-    } else {
-        console.log('Invalid input');
+    try {
+        await fs.access(newPath);
+        const stats = await fs.stat(newPath); // Получаем информацию о файле
+
+        if (stats.isDirectory()) {
+            return newPath; // Если это директория, возвращаем новый путь
+        } else {
+            console.log('Invalid input');
+        }
+    } catch (error) {
+        console.log('Invalid input'); // Если возникла ошибка, выводим сообщение
     }
 }

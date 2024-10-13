@@ -1,9 +1,12 @@
 import { join } from 'path';
-import { writeFile } from 'fs';
+import { promises as fsPromises } from 'fs';
 
-export function createFile(currentDir, fileName) {
+export async function createFile(currentDir, fileName) {
     const fullPath = join(currentDir, fileName);
-    writeFile(fullPath, '', (err) => {
-        if (err) console.log('Operation failed');
-    });
+    try {
+        await fsPromises.writeFile(fullPath, '');
+        console.log('File create successfully');
+    } catch (e) {
+        console.log('Operation failed');
+    }
 }

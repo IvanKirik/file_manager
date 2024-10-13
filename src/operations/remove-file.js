@@ -1,9 +1,12 @@
+import { promises as fsPromises } from 'fs';
 import { resolve } from 'path';
-import { unlink } from 'fs';
 
-export function removeFile(currentDir, filePath) {
+export async function removeFile(currentDir, filePath) {
     const fullPath = resolve(currentDir, filePath);
-    unlink(fullPath, (err) => {
-        if (err) console.log('Operation failed');
-    });
+    try {
+        await fsPromises.unlink(fullPath);
+        console.log('File removed successfully');
+    } catch (err) {
+        console.log('Operation failed');
+    }
 }
